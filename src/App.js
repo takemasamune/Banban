@@ -15,6 +15,7 @@ function App() {
   const audio = new Audio('ban.mp3');
   const inputEl = React.useRef(null);
   const [id, setId] = React.useState(2);
+  const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
     //inputEl.current.focus();
@@ -25,9 +26,14 @@ function App() {
   });
 
   const onKeyPress = function (e) {
-    const id = Math.floor(Math.random() * images.length) + 1;
-    if (e.keyCode === 13) {
-      setId(id);
+    let newid = Math.floor(Math.random() * images.length) + 1;
+    if(newid === id) {
+      newid++;
+      if(newid > images.length) newid = 1;
+    }
+    if(e.keyCode === 13) {
+      setId(newid);
+      setCount(count+1);
       audio.play();
     }
   }
@@ -40,6 +46,7 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>image thumbnail app</h1>
+        <h2>Count: {count}</h2>
       </header>
       <div className="Input">
         <input type="image" ref={inputEl} onKeyPress={onKeyPress} src={findImage(id).url} width="800" alt="" />
