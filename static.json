@@ -3,5 +3,9 @@
         "img/**": {
             "Cache-Control": "public, max-age=512000"
         }
+    },
+    "root": "build/",
+    "routes": {
+        "/**": "index.html"
     }
 }
