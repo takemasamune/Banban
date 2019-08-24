@@ -1,6 +1,6 @@
 {
     "headers": {
-        "img/**": {
+        "/img/**": {
             "Cache-Control": "public, max-age=512000"
         }
     },
