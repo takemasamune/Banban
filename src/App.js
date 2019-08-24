@@ -11,8 +11,8 @@ function App() {
     {id:6, url: 'img/6.jpg'},
     {id:7, url: 'img/7.jpg'},
   ];
-  const audio = new Audio('ban.mp3');
 
+  const audio = new Audio('ban.mp3');
   const inputEl = React.useRef(null);
   const [id, setId] = React.useState(2);
 
