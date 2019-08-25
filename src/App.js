@@ -16,6 +16,7 @@ function App() {
   const inputEl = React.useRef(null);
   const [id, setId] = React.useState(2);
   const [count, setCount] = React.useState(0);
+  let submitFlag = false;
 
   React.useEffect(() => {
     inputEl.current.focus();
@@ -26,18 +27,24 @@ function App() {
   });
 
   const onKeyPress = function (e) {
-    e.preventDefault();
-    let newid = Math.floor(Math.random() * images.length) + 1;
-    if(newid === id) {
-      newid++;
-      if(newid > images.length) newid = 1;
+    if(!submitFlag) {
+      submitFlag = true;
+      e.preventDefault();
+      let newid = Math.floor(Math.random() * images.length) + 1;
+      if (newid === id) {
+        newid++;
+        if (newid > images.length) newid = 1;
+      }
+      if (e.keyCode === 13 || e.target.value === 'imageElement') {
+        setId(newid);
+        setCount(count + 1);
+        audio.play();
+      }
+      //console.log(e);
+      setInterval(() => {
+        submitFlag = false;
+      }, 100);
     }
-    if(e.keyCode === 13 || e.target.value === 'imageElement') {
-      setId(newid);
-      setCount(count+1);
-      audio.play();
-    }
-    //console.log(e);
     return false;
   }
 
