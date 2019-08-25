@@ -27,9 +27,11 @@ function App() {
   const [isClicked, setClicked] = React.useState(false);
   
   const updateState = () => {
-    audio.play();
+    audio.pause();
+    audio.currentTime = 0;
     setId(findNextId(id));
     setCount(count + 1);
+    audio.play();
   }
 
   const handleKeyDown = (e) => {
