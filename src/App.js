@@ -43,7 +43,7 @@ function App() {
       //console.log(e);
       setInterval(() => {
         submitFlag = false;
-      }, 100);
+      }, 150);
     }
     return false;
   }
