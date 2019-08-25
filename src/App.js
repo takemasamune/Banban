@@ -22,28 +22,30 @@ function App() {
   }
 
   const audio = new Audio('assets/ban.mp3');
+  audio.load();
+
   const [id, setId] = React.useState(findNextId());
   const [count, setCount] = React.useState(0);
   const [isClicked, setClicked] = React.useState(false);
-  
-  const updateState = () => {
-    audio.pause();
-    audio.currentTime = 0;
-    setId(findNextId(id));
-    setCount(count + 1);
-    audio.play();
-  }
 
   const handleKeyDown = (e) => {
+    const updateState = () => {
+      setId(findNextId(id));
+      setCount(count + 1);
+    }
+
     if (!isClicked) {
       setClicked(true);
       if (e.keyCode === 13 || e.target.value === 'imageElement') {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
         updateState();
       }
 
       setTimeout(() => {
         setClicked(false);
-      }, 50);
+      }, 100);
     }
     else {
       console.log("too busy, request rejected");
