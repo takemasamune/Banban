@@ -29,10 +29,7 @@ function App() {
   const [isClicked, setClicked] = React.useState(false);
 
   const handleKeyDown = (e) => {
-    const updateState = () => {
-      setId(findNextId(id));
-      setCount(count + 1);
-    }
+    e.preventDefault();
 
     if (!isClicked) {
       setClicked(true);
@@ -40,7 +37,8 @@ function App() {
         audio.pause();
         audio.currentTime = 0;
         audio.play();
-        updateState();
+        setId(findNextId(id));
+        setCount(count + 1);
       }
 
       setTimeout(() => {
@@ -52,15 +50,15 @@ function App() {
     }
   }
   const handleTouchEvent = (e) => {
-    audio.load();
+    handleKeyDown(e);
   }
 
   React.useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('touchstart', handleTouchEvent);
+    document.addEventListener('touchend', handleTouchEvent);
     return (() => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('touchstart', handleTouchEvent);
+      document.removeEventListener('touchend', handleTouchEvent);
     });
   });
 
